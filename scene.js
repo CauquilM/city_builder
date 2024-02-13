@@ -1,32 +1,41 @@
 //Handles all the scene management
-import {Color, PerspectiveCamera, Scene, WebGLRenderer} from "three";
+import {BoxGeometry, Color, Mesh, MeshBasicMaterial, PerspectiveCamera, Scene, WebGLRenderer} from "three";
 
 export function createScene() {
     //Initial scene setup
-    const gameWindow = document.getElementById('scene');
-    let gameWindowSize = gameWindow.offsetWidth / gameWindow.offsetHeight;
+    const gameWindow = document.getElementById('mainScene');
 
     // We create a threeJS scene
     const scene = new Scene();
 
     //We define the color of the background
-    scene.background = new Color('102', '153', '255');
+    scene.background = new Color('aquamarine'); // Hexadecimal representation of RGB (102, 153, 255)
+
 
     //Create the camera
     //We set the FOV (genre les yeux voient à 180°), the ratio of the scene, the closest objects won't be rendered and the farest
-    const camera = PerspectiveCamera(75, gameWindowSize, 0.1, 1000);
+    const camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight);
 
     //This will draw all our objects and all
-    const renderer = WebGLRenderer();
+    const renderer = new WebGLRenderer();
 
     //We set the size of the renderer to the size of the window
-    renderer.setSize(gameWindowSize);
+    renderer.setSize(gameWindow.offsetWidth, gameWindow.offsetHeight);
 
     //We attach the renderer to the game window
     gameWindow.appendChild((renderer.domElement));
 
+    const geometry = new BoxGeometry( 1, 1, 1 );
+    const material = new MeshBasicMaterial( { color: 'chocolate' } );
+    const mesh = new Mesh( geometry, material );
+    scene.add( mesh );
+
+    camera.position.z = 5;
+
     /* This function draws the scene */
     function draw() {
+        mesh.rotation.x += 0.01;
+        mesh.rotation.y += 0.01;
         /*So the rendered knows what to render*/
         renderer.render(scene, camera);
     }
