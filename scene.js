@@ -25,17 +25,17 @@ export function createScene() {
     //We attach the renderer to the game window
     gameWindow.appendChild((renderer.domElement));
 
-    const geometry = new BoxGeometry( 1, 1, 1 );
+    /*const geometry = new BoxGeometry( 1, 1, 1 );
     const material = new MeshBasicMaterial( { color: 'chocolate' } );
     const mesh = new Mesh( geometry, material );
     scene.add( mesh );
 
-    camera.position.z = 5;
+    camera.position.z = 5;*/
 
     /* This function draws the scene */
     function draw() {
-        mesh.rotation.x += 0.01;
-        mesh.rotation.y += 0.01;
+        /*mesh.rotation.x += 0.01;
+        mesh.rotation.y += 0.01;*/
         /*So the rendered knows what to render*/
         renderer.render(scene, camera);
     }
